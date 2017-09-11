@@ -6,9 +6,8 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "amqp": "^0.2.6",
+    "amqplib": "^0.5.1",
     "bcrypt-nodejs": "0.0.3",
-    "express": "^4.13.3",
     "mongoose": "^4.11.11"
   },
   "engines": {

@@ -1,6 +1,6 @@
 version: '2.1'
 services:
-    client1:
+    node1:
         build:
             context: ./node1
         ports:
