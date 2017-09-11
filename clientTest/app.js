@@ -6,13 +6,21 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://mongodb:27017');
 
 var Climber = require ('./model');
+var names = ['Greg', 'David', 'Jim', 'John', 'Sam', 'Luc', 'Philip'];
+var gyms = ['Arkose Nation', 'Solo Escalade', 'Bloc Session'];
+
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min +1)) + min;
+}
 
 amqp.connect('amqp://rabbitmq', function(err, conn) {
     console.log('Connected to rabbit');
     conn.createChannel(function(err, ch) {
 	var q1 = 'fanBoard';
 	var q2 = 'fanBoard2';
-	var msg = '{"name": "Jim", "gym": "BS.4"}';
+	var msg = '{"name": "' + names[getRandomIntInclusive(0,6)] + '", "gym": "' + gyms[getRandomIntInclusive(0,2)] + '"}';
 
 	ch.assertQueue(q1, {durable: true});
 	ch.assertQueue(q2, {durable: true});
