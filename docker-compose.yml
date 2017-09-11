@@ -1,0 +1,31 @@
+version: '2.1'
+services:
+    client1:
+        build:
+            context: ./node1
+        ports:
+            - "4242:4242"
+        links:
+            - mongodb
+            - rabbitmq
+        depends_on:
+            rabbitmq:
+                condition: service_started
+            mongodb:
+                condition: service_started
+    rabbitmq:
+        image: rabbitmq:3-management
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+    mongodb:
+        image: mongo:latest
+        container_name: "mongodb"
+        environment:
+            - MONGO_DATA_DIR=/data/db
+            - MONGO_LOG_DIR=/dev/null
+        volumes:
+            - ./data/db:/data/db
+        ports:
+            - "27017:27017"
+        command: "--smallfiles --logpath=/dev/null"

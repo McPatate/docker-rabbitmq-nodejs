@@ -1,0 +1,4 @@
+.docker-compose.yml_save
+/node1/node_modules
+/clientTest/node_modules
+/data
